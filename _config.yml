@@ -110,10 +110,10 @@ author:
       # url: "https://twitter.com/"
     - label: "Facebook"
       icon: "fab fa-fw fa-facebook-square"
-      url: https://www.facebook.com/jeonwoosung
+      url: "https://www.facebook.com/jeonwoosung"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/jeonwoosung
+      url: "https://github.com/jeonwoosung"
 #    - label: "Instagram"
 #      icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"
