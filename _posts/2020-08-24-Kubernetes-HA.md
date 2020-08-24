@@ -11,22 +11,31 @@ categories: kubernetes
 - Master Node의  Scheduler, Controller는 APIServer를 통해 Kubernetes Orchestration 수행
 - Worker Node의 Kubelet, Kubeproxy은 Master 노드의 APIServer를 통해 데이터 조회 및 Worker Node 반영
 
-[그림1. Kubernetes아키텍처(출처: kubernetes in action chapter11)]
+[그림1. Kubernetes아키텍처]
+
 ![Kubernetes 아키텍처 이중화-2](0002.png)
 
+[출처: kubernetes in action chapter11]
 
 ## Kubernetes Master Node 클러스터 구성
-[그림2. MasterNode 클러스터 구성(출처: kubernetes in action chapter11)]
+[그림2. MasterNode 클러스터 구성]
+
 ![Kubernetes 아키텍처 이중화-3](0003.jpg)
+
+[출처: kubernetes in action chapter11]
 
 - [그림2]와 같이 Masternode 클러스터 구성 가능
 - API서버는 Stateless로 동작하므로 앞에 LB를 구성하여 이중화 가능
-- Controller Manager, Scheduler의 경우 Active/Stand-by로 구성(지속적인 클러스터 상태 감시와 대응으로 특정 시점 원하지 않는 형상이 발생 가능)
+- 그림3과 같이 Controller Manager, Scheduler의 경우 Active/Stand-by로 구성(지속적인 클러스터 상태 감시와 대응으로 특정 시점 원하지 않는 형상이 발생 가능)
+
+
+[그림3. MasterNode 클러스터 구성]
 
 ![Kubernetes 이중화-3](0001.png)
-[그림3. MasterNode 클러스터 구성(출처: https://skysoo1111.tistory.com/47)]
 
-- 때문에 [그림3]과 같이 동작
+(출처: https://skysoo1111.tistory.com/47)
+
+
 
 ## 결론
 - 마스터노드를 이중화 할 경우 API서버는 Active/Active로, Controller, Scheduler는 Active/Stand-by로 구성 가능
