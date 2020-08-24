@@ -4,7 +4,7 @@ date: 2020-08-24 08:26:28 +0800
 categories: kubernetes
 ---
 
-# Kubernetes Master 노드 아키텍처
+## Kubernetes Master 노드 아키텍처
 
 - 쿠버네티스는 etcd, APIServer, Scheduler, Controller로 구성
 - APIServer는 설정 저장소인 ETCD에 접근하여 데이터를 조회하거나 저장
@@ -15,7 +15,7 @@ categories: kubernetes
 ![Kubernetes 아키텍처 이중화-2](0002.png)
 
 
-# Kubernetes Master Node 클러스터 구성
+## Kubernetes Master Node 클러스터 구성
 [그림2. MasterNode 클러스터 구성(출처: kubernetes in action chapter11)]
 ![Kubernetes 아키텍처 이중화-3](0003.jpg)
 
@@ -28,7 +28,7 @@ categories: kubernetes
 
 - 때문에 [그림3]과 같이 동작
 
-# 결론
+## 결론
 - 마스터노드를 이중화 할 경우 API서버는 Active/Active로, Controller, Scheduler는 Active/Stand-by로 구성 가능
 - 마스터 노드의 결함에 대해서는 충분히 대응이 가능할 것으로 예상
 - 하지만 Kubernetes 형상 변경 시 발생할 수 있는 클러스터 내부에서 발생 가능한 오류 대응을 고려하면, Cluster Federation도 고려 필요(Kubernetes in Action, Appendix D참고)
