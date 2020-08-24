@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes 이중화 아키텍처"
+title: "Kubernetes 이중화 아키텍처3"
 date: 2020-08-24 08:26:28 +0800
 categories: kubernetes
 ---
