@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes 이중화 아키텍처3"
+title: "Kubernetes 이중화 아키텍처"
 date: 2020-08-24 08:26:28 +0800
 categories: kubernetes
 ---
@@ -17,7 +17,7 @@ categories: kubernetes
 
 # Kubernetes Master Node 클러스터 구성
 [그림2. MasterNode 클러스터 구성(출처: kubernetes in action chapter11)]
-![Kubernetes 아키텍처 이중화-3](0003.png)
+![Kubernetes 아키텍처 이중화-3](0003.jpg)
 
 - [그림2]와 같이 Masternode 클러스터 구성 가능
 - API서버는 Stateless로 동작하므로 앞에 LB를 구성하여 이중화 가능
