@@ -1,10 +1,10 @@
 ---
 title: "Rancher설치(helm활용)"
 date: 2020-08-21 08:26:28 +0800
-categories: jekyll update
+categories: kubernetes
 ---
 
-# Helm 
+# Helm
 
 ## Rancher Install(with helm)
 
