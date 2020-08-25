@@ -1,27 +1,22 @@
 ---
 layout: default
 ---
-<!-- https://hoisharka.github.io/jekyll/2017/12/03/jekyll-category-002/ -->
-<div class="page clearfix">
-  <div class="left">
-    <h1>{{page.title}}</h1>
-    <hr>
-    <ul>
-      {% for category in site.categories %}
-      <h2 id="{{category | first}}">{{category | first}}</h2>
-      {% for posts in category %}
-      {% for post in posts %}
-      {% if post.url %}
-      <li>
-        <time>
-          {{ post.date | date:"%F" }} {{ post.date | date: "%a" }}.
-        </time>
-        <a class="title" href="{{ post.url | prepend: site.url }}">{{ post.title }}</a>
-      </li>
-      {% endif %}
-      {% endfor %}
-      {% endfor %}
-      {% endfor %}
-    </ul>
-  </div>
-</div>
+
+<p class="page__taxonomy">
+    <strong
+    ><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i>
+    Categories:
+    </strong>
+    <p >
+    {% for category in site.categories %}
+    <a
+        href="/category/{{ category[0] | slugify: 'pretty' }}"
+        class="page__taxonomy-item category-item"
+        rel="tag"
+    >
+        {{ category[0] }}
+        <span class="category-count">{{category | last | size}}</span>
+    </a>
+    {% endfor %}
+    </p>
+</p>
