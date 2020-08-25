@@ -1,7 +1,7 @@
 ---
 title: "Rancher설치(helm활용)"
 date: 2020-08-21 08:26:28 +0800
-categories: [kubernetes, rancher]
+categories: ["kubernetes", "rancher"]
 ---
 
 # Helm
