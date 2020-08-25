@@ -8,7 +8,7 @@
     <p >
     {% for category in site.categories %}
     <a
-        href="/categories/{{ category[0] | slugify: 'pretty' }}"
+        href="/category/{{ category[0] | slugify: 'pretty' }}"
         class="page__taxonomy-item category-item"
         rel="tag"
     >
