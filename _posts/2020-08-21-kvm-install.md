@@ -1,7 +1,7 @@
 ---
 title: "KVM설치"
 date: 2020-08-21 08:26:28 +0800
-categories: ["kubernetes", "rancher"]
+categories: ["kubernetes"]
 ---
 
 # KVM설치
