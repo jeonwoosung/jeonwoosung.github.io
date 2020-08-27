@@ -1,5 +1,5 @@
 ---
-title: "Rancher설치(helm활용)"
+title: "KVM설치"
 date: 2020-08-21 08:26:28 +0800
 categories: ["kubernetes", "rancher"]
 ---
@@ -56,3 +56,9 @@ location에 게스트os에 설치할 경로를 기입합니다.
      --location /home/osimage/CentOS-7-x86_64-Minimal-2003.iso \
      --graphics none \
      --extra-args='console=ttyS0'
+
+## VM복제
+OS설치가 완료되면, 워커노드로 사용할 VM을 복제 합니다.
+
+     virt-clone --original master --name worker01 --file /data/vmimage/worker01.img
+     virt-clone --original master --name worker02 --file /data/vmimage/worker02.img
