@@ -62,3 +62,5 @@ OS설치가 완료되면, 워커노드로 사용할 VM을 복제 합니다.
 
      virt-clone --original master --name worker01 --file /data/vmimage/worker01.img
      virt-clone --original master --name worker02 --file /data/vmimage/worker02.img
+
+사실 생각보다 쉬워요. 처음할때는 몇일 걸렸는데, 몇번 하니깐 쉽네요 ㅎㅎㅎ
