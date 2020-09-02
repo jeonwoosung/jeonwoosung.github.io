@@ -21,12 +21,29 @@ Kubernetes에서 특정 노드의 고부하 시
 
 ## 검증 방안
 
-- 워커노드는 1 CPU할당
+- 부하를 발생시킬 POD 2개를 동일한 워커노드에 배치하여 2개의 POD에 부하를 발생
+- 한쪽 POD는 100%의 부하를, 다른쪽 POD는 100%가 초과되도록 부하 발생
+- CPU 공유로 인한 경합의 증감 차이를 확인하기 위해 워커노드 1CPU, 2CPU로 구성 및 POD 부하 수준 0.5CPU, 1CPU로 구분하여 검증
+
+### 워커노드 1CPU, POD 0.5CPU 검증
+
+- 워커노드 1 CPU할당
 - 동일노드에 2개의 POD 생성(loadtest1, loadtest2)
-- 각 POD의 CPU는 0.5 vcpu를 요청
+- 각 POD CPU는 0.5 cpu를 요청
 - 1번 POD(loadtest1)에서 고부하 명령어 실행(cat /dev/urandom > /dev/null)
 - 2번 POD(loadtest1)에서 상기 고부하 명령어를 점진적(1회, 5회, 10회)으로 증가 하여 부하 수준 증가
 - 2번 POD의 명령어의 증감에 따라 1번 POD의 CPU사용량에 영향을 미치는지 검증
+
+### 워커노드 2CPU, POD 1 CPU 검증
+
+- 워커노드 2 CPU할당
+- 동일노드에 2개의 POD 생성(loadtest1, loadtest2)
+- 각 POD CPU는 1 cpu를 요청
+- 1번 POD(loadtest1)에서 고부하 명령어 실행(cat /dev/urandom > /dev/null)
+- 2번 POD(loadtest1)에서 상기 고부하 명령어를 점진적(1회, 5회, 10회)으로 증가 하여 부하 수준 증가
+- 2번 POD의 명령어의 증감에 따라 1번 POD의 CPU사용량에 영향을 미치는지 검증
+
+## 검증 환경구성
 
 ### POD1 사양(Loadtest1)
 
@@ -47,7 +64,7 @@ Kubernetes에서 특정 노드의 고부하 시
         name: loadtest
         resources:
           limits:
-            cpu: "0.5"
+            cpu: "0.5" # 워커노드 2CPU, POD 1 CPU 검증 시 1로 변경
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       nodeName: worker01
@@ -73,18 +90,20 @@ Kubernetes에서 특정 노드의 고부하 시
         name: loadtest
         resources:
           limits:
-            cpu: "0.5"
+            cpu: "0.5" # 워커노드 2CPU, POD 1 CPU 검증 시 1로 변경
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       nodeName: worker01
 
     status: {}
 
-### 실행 명령어
+### 부하발생 명령
 
     nohup cat /dev/urandom > /dev/null &
 
 ### 성능 측정
+
+워커노드에서 아래의 명령어로 POD 1의 CPU사용률 측정, 하기의 $PID는 부하발생 명령의 프로세스ID
 
     # top명령어를 활용하여 CPU사용률 확인(첫번째 수집 값 삭제)
     top -b -n 7 -d 10.0 -p $PID |grep $PID
@@ -99,6 +118,8 @@ Kubernetes에서 특정 노드의 고부하 시
 
 ## 검증 결과
 
+### 워커노드 1CPU, POD 0.5CPU 검증 결과
+
 |부하수준|1회|2회|3회|4회|5회|평균|편차|CPU 사용률(단독실행 대비)|
 |------|---|---|---|---|---|---|---|---|
 |단독실행|49.98|49.97|49.98|50.00|50.00|49.99|0.014|100.00%|
@@ -110,9 +131,8 @@ Kubernetes에서 특정 노드의 고부하 시
 
 관련 링크: [소스코드](https://github.com/jeonwoosung/k8s-install/tree/master/k8s_test/cpu-isolation/half_core)
 
-## 추가검증
 
-Worker노드에 2CPU할당 후 POD에 1CPU 제한 시 검증 수행
+### 워커노드 2CPU, POD 1 CPU 검증 결과
 
 |부하수준|1회|2회|3회|4회|5회|평균|편차|CPU 사용률(단독실행 대비)|
 |------|---|---|---|---|---|---|---|---|
@@ -124,3 +144,11 @@ Worker노드에 2CPU할당 후 POD에 1CPU 제한 시 검증 수행
 각 POD당 1개 부하 시 약 1%가량 성능 감소 발생, 부하수준이 높아질수록 성능 감소 증가 확인
 
 관련 링크: [소스코드](https://github.com/jeonwoosung/k8s-install/tree/master/k8s_test/cpu-isolation/one_core)
+
+
+## 결론
+
+- POD에 Limit으로 할당된 CPU사용률은 타 POD의 간섭이 발생할 수 있음
+- 워커노드 1CPU, POD 0.5CPU 시, Pod2의 부하에 따라서 Pod1의 CPU사용률에 2%가량 영향을 미치는 것으로 확인
+- 워커노드 2CPU, POD 1CPU 시, 부하수준이 높아질수록 성능 감소 증가 확인
+- POD 배치 시 경합을 고려한 배치 필요
