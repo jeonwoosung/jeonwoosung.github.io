@@ -77,15 +77,8 @@ Kubernetes에서 특정 노드의 고부하 시
 
 ### 검증 명령어
 
-    ps -eo user,pid,ppid,rss,size,vsize,pmem,pcpu,time,cmd |grep urandom |grep -v 'ps -e'
-
-    SET=$(seq 0 5)
-    for i in $SET
-    do
-        echo "Running loop seq "$i
-        top -b -n 1 -p 16014 |grep 16014
-        sleep 10
-    done
+    # top명령어를 활용하여 CPU사용률 확인(첫번째 수집 값 삭제)
+    top -b -n 7 -d 10.0 -p $PID |grep $PID
 
 ## 검증 실행
 
