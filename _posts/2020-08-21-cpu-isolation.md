@@ -16,7 +16,7 @@ categories: ["kubernetes"]
 
 - 동일노드에 2개의 POD 생성(loadtest1, loadtest2)
 - 각 POD의 CPU는 0.5vcpu
-- 1번 POD(loadtest1)에서 고 부하 명령어 실행(cat /dev/urandom | md5sum)
+- 1번 POD(loadtest1)에서 고 부하 명령어 실행(cat /dev/urandom > /dev/null)
 - 2번 POD(loadtest1)에서 고 부하 명령어를 점진적(1회, 5회, 10회)으로 증가 하여 부하 수준 증가
 - 2번 POD의 명령어의 증감에 따라 1번 POD의 CPU사용량에 영향을 미치는지 검증
 
