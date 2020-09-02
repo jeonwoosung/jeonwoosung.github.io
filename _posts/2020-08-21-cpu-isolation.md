@@ -4,7 +4,7 @@ date: 2020-08-21 08:26:28 +0800
 categories: ["kubernetes"]
 ---
 
-# CPU 격리 검증
+# Kubernetes의 고부하 환경에서의 CPU 격리 성능 검증
 
 ## 검증 배경
 
