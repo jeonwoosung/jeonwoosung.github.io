@@ -11,6 +11,14 @@ categories: ["kubernetes"]
 Kubernetes에서 특정 노드의 고부하 시
 노드에 동작하는 POD의 CPU사용량이 요청한 수량 만큼 할당되는지 검증
 
+## 검증 환경
+- 서버 사양:
+  - CPU: AMD FX8120(3140MHz, 8Core)
+  - 메모리: 8GB
+- 시스템 구성:
+  - Hypervisor: KVM
+  - Kubernetes: 1MasterNode, 2WorkerNode
+
 ## 검증 방안
 
 - 워커노드는 1 CPU할당
@@ -76,7 +84,7 @@ Kubernetes에서 특정 노드의 고부하 시
 
     nohup cat /dev/urandom > /dev/null &
 
-### 검증 명령어
+### 성능 측정
 
     # top명령어를 활용하여 CPU사용률 확인(첫번째 수집 값 삭제)
     top -b -n 7 -d 10.0 -p $PID |grep $PID
