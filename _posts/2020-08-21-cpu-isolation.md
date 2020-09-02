@@ -107,5 +107,6 @@ categories: ["kubernetes"]
 
 검증결과 loadtest2 Pod의 부하에 따라서 Pod1의 CPU사용률에는 영향을 미치는 것으로 확인
 
+* 이메일링크: <address@example.com>
 
-관련 링크: [Google][googlelink]
+관련 링크: [github](https://github.com/jeonwoosung/k8s-install/tree/master/k8s_test/cpu-isolation/half_core, "github link")
