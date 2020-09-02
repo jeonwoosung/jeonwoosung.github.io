@@ -114,3 +114,5 @@ Worker노드에 2CPU할당 후 POD에 1CPU 제한 시 검증 수행
 |Load Level10|92.95|92.55|93.12|93.53|95.1|93.45|0.88|93.52%|
 
 각 POD당 1개 부하 시 약 1%가량 성능 감소 발생, 부하수준이 높아질수록 성능 감소 증가 확인
+
+관련 링크: [소스코드](https://github.com/jeonwoosung/k8s-install/tree/master/k8s_test/cpu-isolation/one_core)
