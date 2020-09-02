@@ -8,16 +8,15 @@ categories: ["kubernetes"]
 
 ## 검증 배경
 
-고 부하 환경에서 특정 노드 내 POD간 경합으로
- POD에 할당된 값의  CPU자원 사용 가능여부 확인
-
+Kubernetes에서 특정 노드의 고부하 시  
+노드에 동작하는 POD의 CPU사용량이 요청한 수량 만큼 할당되는지 검증
 
 ## 검증 방안
 
 - 동일노드에 2개의 POD 생성(loadtest1, loadtest2)
-- 각 POD의 CPU는 0.5vcpu
-- 1번 POD(loadtest1)에서 고 부하 명령어 실행(cat /dev/urandom > /dev/null)
-- 2번 POD(loadtest1)에서 고 부하 명령어를 점진적(1회, 5회, 10회)으로 증가 하여 부하 수준 증가
+- 각 POD의 CPU는 0.5 vcpu를 요청
+- 1번 POD(loadtest1)에서 고부하 명령어 실행(cat /dev/urandom > /dev/null)
+- 2번 POD(loadtest1)에서 상기 고부하 명령어를 점진적(1회, 5회, 10회)으로 증가 하여 부하 수준 증가
 - 2번 POD의 명령어의 증감에 따라 1번 POD의 CPU사용량에 영향을 미치는지 검증
 
 ### POD1 사양(Loadtest1)
